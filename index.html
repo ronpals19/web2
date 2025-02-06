@@ -2,90 +2,100 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <!-- Ensures proper scaling on mobile devices -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Color Changing Car</title>
   <style>
-    /* Universal reset to remove all default margins and paddings */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    /* Remove any potential whitespace between inline elements */
     html, body {
       overflow-x: hidden;
       font-family: Arial, sans-serif;
     }
     
-    /* Container flush with the very top of the viewport */
     .car-container {
       width: 100%;
-      max-width: 1000px; /* Maximum width for larger screens */
-      margin: 0 auto;    /* Center container horizontally */
+      max-width: 1000px;
+      margin: 0 auto;
       position: relative;
       text-align: center;
+      padding-bottom: 60px; /* Creates space for color picker */
     }
     
-    /* Responsive car image that scales with the container */
     #car-image {
       width: 100%;
       height: auto;
       transition: opacity 0.2s;
-      display: block;  /* Prevents any extra inline spacing */
+      display: block;
+      margin-bottom: 30px; /* Space between image and color picker */
     }
     
-    /* Color picker positioned over the image with minimal spacing */
     .color-picker {
       position: absolute;
-      bottom: 10px;       /* Adjust if needed for closer placement */
+      bottom: 20px; /* Adjusted spacing */
       left: 50%;
       transform: translateX(-50%);
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 25px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
     
-    /* Smaller color buttons for a sleek, non-intrusive look */
     .color-button {
-      width: 30px;
-      height: 30px;
-      border: none;
+      width: 35px;
+      height: 35px;
+      border: 2px solid #fff;
       border-radius: 50%;
-      margin: 5px;
+      margin: 0 8px;
       cursor: pointer;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      transition: transform 0.2s;
+      transition: all 0.3s ease;
     }
-    
+
     .color-button:hover {
-      transform: scale(1.1);
+      transform: scale(1.15);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
-    
-    /* Tablet view adjustments */
+
     @media (max-width: 768px) {
+      .car-container {
+        padding-bottom: 50px;
+      }
+      
+      #car-image {
+        margin-bottom: 25px;
+      }
+      
+      .color-button {
+        width: 30px;
+        height: 30px;
+        margin: 0 6px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .car-container {
+        padding-bottom: 40px;
+      }
+      
+      #car-image {
+        margin-bottom: 20px;
+      }
+      
       .color-button {
         width: 25px;
         height: 25px;
-        margin: 4px;
-      }
-    }
-    
-    /* Mobile view adjustments */
-    @media (max-width: 480px) {
-      .color-button {
-        width: 20px;
-        height: 20px;
-        margin: 3px;
+        margin: 0 4px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- The container is flush with the top of the viewport -->
   <div class="car-container">
-    <!-- Car image that fills the container -->
     <img id="car-image" src="quartz-blue.webp" alt="Car Color Preview">
     
-    <!-- Color picker buttons positioned over the image -->
     <div class="color-picker">
       <button class="color-button" style="background: #273651" 
               onclick="changeColor('quartz-blue')" 
@@ -108,10 +118,8 @@
   <script>
     function changeColor(colorName) {
       const carImage = document.getElementById('car-image');
-      // Fade-out effect
       carImage.style.opacity = 0;
       setTimeout(() => {
-        // Update image source and fade back in
         carImage.src = ${colorName}.webp;
         carImage.style.opacity = 1;
       }, 200);
