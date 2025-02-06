@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Changing Car</title>
+  <style>
+    /* Universal reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    /* Car frame */
+    .car-container {
+      width: 630px;
+      height: 431px;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      padding-bottom: 10px;
+    }
+
+    /* Car image */
+    #car-image {
+      width: auto;
+      height: 60%; /* Ensures car fills 60% of the frame */
+      max-height: 260px; /* Adjust for best fit */
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    /* Color picker */
+    .color-picker {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 5px; /* Minimal spacing */
+    }
+
+    /* Color buttons */
+    .color-button {
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .color-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="car-container">
+    <!-- Car Image (Ensure correct path) -->
+    <img id="car-image" src="quartz-blue.webp" alt="Car Color Preview">
+
+    <!-- Color Picker -->
+    <div class="color-picker">
+      <button class="color-button" style="background: #56859e" onclick="changeColor('quartz-blue')" title="Quartz Blue"></button>
+      <button class="color-button" style="background: #808080" onclick="changeColor('harbour-grey')" title="Harbour Grey"></button>
+      <button class="color-button" style="background: #000000" onclick="changeColor('cosmos-black')" title="Cosmos Black"></button>
+      <button class="color-button" style="background: #ffffff; border: 1px solid #ccc;" onclick="changeColor('crystal-white')" title="Crystal White"></button>
+    </div>
+  </div>
+
+  <script>
+    function changeColor(colorName) {
+      const carImage = document.getElementById('car-image');
+
+      // Ensure fade effect works correctly
+      carImage.style.opacity = 0;
+
+      setTimeout(() => {
+        carImage.src = colorName + ".webp";
+
+        // Error handling: If image is missing, fallback to the default blue car
+        carImage.onerror = function() {
+          this.src = "quartz-blue.webp"; 
+        };
+
+        carImage.style.opacity = 1;
+      }, 200);
+    }
+  </script>
+
+</body>
+</html>
